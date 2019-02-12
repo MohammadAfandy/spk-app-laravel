@@ -25,4 +25,5 @@ Route::get('reset', 'AuthController@reset');
 
 Route::group(['middleware' => ['web']], function(){
 	Route::resource('spk', 'SpkController');
+	Route::resource('alternatif', 'AlternatifController');
 });

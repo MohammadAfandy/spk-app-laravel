@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SpkApp\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Spk;
-use App\Http\Requests\SpkRequest;
+use SpkApp\Spk;
+use SpkApp\Http\Requests\SpkRequest;
 use Session;
 
 class SpkController extends Controller

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SpkApp\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\http\Requests;
+use SpkApp\http\Requests;
 
 class AuthController extends Controller
 {

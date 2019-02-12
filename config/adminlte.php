@@ -119,6 +119,11 @@ return [
             'route' => 'spk.index',
             'icon' => 'lock'
         ],
+        [
+            'text' => 'Alternatif',
+            'route' => 'alternatif.index',
+            'icon' => 'lock'
+        ],
     ],
 
     /*
