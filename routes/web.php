@@ -25,12 +25,25 @@ Route::group(['middleware' => ['web']], function(){
 		Route::get('/', function () {
 			return view('index');
 		});
+		
+		// SPK
 		Route::resource('spk', 'SpkController');
+		
+		// Alternatif
 		Route::resource('alternatif', 'AlternatifController');
+		// Route::get('alternatif/{id}', [
+		// 	'as' => 'alternatif.index', 'uses' => 'AlternatifController@index']
+		// );
+		
+		// Datatable API
 		Route::group(['prefix' => 'datatable', 'namespace' => 'Datatable'], function(){
 			Route::get('spk', [
 				'as' => 'datatable.spk',
 				'uses' => 'SpkController@me',
+			]);
+			Route::get('alternatif', [
+				'as' => 'datatable.alternatif',
+				'uses' => 'AlternatifController@me',
 			]);
 		});
 	});

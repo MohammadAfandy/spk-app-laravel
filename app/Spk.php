@@ -21,4 +21,9 @@ class Spk extends Model
 	{
 		return $this->hasOne('SpkApp\JenisBobot', 'id', 'jenis_bobot_id');
 	}
+
+	public function alternatif()
+	{
+		return $this->hasMany('SpkApp\Alternatif', 'spk_id', 'id');
+	}
 }

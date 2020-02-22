@@ -7,36 +7,55 @@ Alternatif
 @stop
 
 @section('content')
-{{ link_to_route('alternatif.create', 'Tambah Alternatif', [], ['class'=>'btn btn-primary']) }}
-@if (!empty($list_alternatif))
-    <table class="table table-bordered table-hover dataTable">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama Alternatif</th>
-                <th>Keterangan</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($list_alternatif as $key => $alt): ?>
-                <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{ $alt->nama_alternatif }}</td>
-                    <td>{{ !empty($alt->keterangan) ? $alt->keterangan : '-' }}</td>
-                    <td>
-                        {{ link_to_route('alternatif.edit', 'Edit', [$alt->id], ['class'=>'btn btn-success btn-xs btn-block']) }}
-                        <br>
-                        {!! Form::open(['route' => ['alternatif.destroy', $alt->id], 'method' => 'DELETE']) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs btn-block btn-delete']) !!}
-                        {!! Form::close() !!}
-                    </td>
-                </tr>
-            <?php endforeach ?>
-        </tbody>
-    </table>
-@else
-    <p>Tidak Ada Data Alternatif</p>
-@endif
 
+<div class="row" style="margin-bottom:20px;">
+    <div class="col-md-4">
+        {!! Form::select('id_spk', $list_spk, $spk_id, ['placeholder' => '-- Pilih SPK --', 'class' => 'form-control pilih-parent']) !!}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @if (!empty($alternatifs))
+            {{ link_to_route('alternatif.create', 'Tambah Alternatif', ['id_spk' => $spk_id], ['class'=>'btn btn-primary']) }}
+            <br><br>
+            <table class="table table-bordered table-hover dataTable" id="alternatif-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Alternatif</th>
+                        <th>Nama SPK</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        @endif
+    </div>
+</div>
+@stop
+
+@section('js')
+<script>
+    $(document).ready(function() {
+        $("#alternatif-table").DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{!! route('datatable.alternatif') !!}' + '?id_spk=<?= request()->get('id_spk') ?>',
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex' },
+                { data: 'nama', name: 'nama' },
+                { data: 'nama_spk', name: 'nama_spk' },
+                { data: 'ket', name: 'ket' },
+                { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
+            ]
+        });
+        
+        $(".pilih-parent").on("change", function() {
+            window.location.href = '{!! route('alternatif.index') !!}' + '?id_spk=' + $(this).val();
+        })
+    });
+</script>
 @stop
