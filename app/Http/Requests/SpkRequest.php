@@ -24,7 +24,8 @@ class SpkRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama_spk' => 'required|string|max:250',
+            'nama' => 'required|string|max:50',
+            'jenis_bobot_id' => 'required|exists:m_jenis_bobot,id',
         ];
     }
 }

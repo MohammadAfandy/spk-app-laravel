@@ -4,6 +4,8 @@ namespace SpkApp\Http\Controllers\Auth;
 
 use SpkApp\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -36,4 +38,14 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // protected function guard() {
+    //     return Auth::guard('web');
+    // }
+
+    protected function loggedOut(Request $request)
+    {
+        return redirect('login');
+    }
+    
 }

@@ -25,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
                 }
             });
         }
+
+        \Illuminate\Support\Facades\Schema::defaultStringLength(191);
     }
 
     /**

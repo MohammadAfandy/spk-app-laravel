@@ -5,6 +5,7 @@ namespace SpkApp\Http\Controllers;
 use Illuminate\Http\Request;
 use SpkApp\Spk;
 use SpkApp\Http\Requests\SpkRequest;
+use SpkApp\JenisBobot;
 use Session;
 
 class SpkController extends Controller
@@ -17,14 +18,13 @@ class SpkController extends Controller
 
 	public function create()
 	{
-		$list_spk = Spk::all();
-		return view('spk.create', compact('list_spk'));
+		$list_bobot = JenisBobot::pluck('nama', 'id');
+		return view('spk.create', compact('list_bobot'));
 	}
 
 	public function store(SpkRequest $request)
 	{
 		$input = $request->all();
-
 		$spk = Spk::create($input);
 		Session::flash('flash_message', 'Berhasil Tambah Data');
 
@@ -33,7 +33,8 @@ class SpkController extends Controller
 
 	public function edit(Spk $spk)
 	{
-		return view('spk.edit', compact('spk'));
+		$list_bobot = JenisBobot::pluck('nama', 'id');
+		return view('spk.edit', compact('spk', 'list_bobot'));
 	}
 
 	public function update(Spk $spk, SpkRequest $request)
