@@ -42,7 +42,6 @@ Route::group(['middleware' => ['web']], function(){
         ]);
 
         // Sub Kriteria
-        // Route::resource('subKriteria', 'SubKriteriaController');
         Route::get('subKriteria/{kriteria}/form', [
             'as' => 'subKriteria.form',
             'uses' => 'SubKriteriaController@form',
@@ -51,6 +50,9 @@ Route::group(['middleware' => ['web']], function(){
             'as' => 'subKriteria.store',
             'uses' => 'SubKriteriaController@store',
         ]);
+
+        // Penilaian
+        Route::resource('penilaian', 'PenilaianController');
         
         // Datatable API
         Route::group(['prefix' => 'datatable', 'namespace' => 'Datatable'], function(){
@@ -65,6 +67,10 @@ Route::group(['middleware' => ['web']], function(){
             Route::get('kriteria', [
                 'as' => 'datatable.kriteria',
                 'uses' => 'KriteriaController@me',
+            ]);
+            Route::get('penilaian', [
+                'as' => 'datatable.penilaian',
+                'uses' => 'PenilaianController@me',
             ]);
         });
     });

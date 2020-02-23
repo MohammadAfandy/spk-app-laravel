@@ -26,6 +26,7 @@ Kriteria
                         <th>Nama Kriteria</th>
                         <th>Tipe</th>
                         <th>Bobot</th>
+                        <th>Sub Kriteria</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -54,6 +55,7 @@ Kriteria
                 { data: 'nama', name: 'nama' },
                 { data: 'tipe', name: 'tipe' },
                 { data: 'bobot', name: 'bobot' },
+                { data: 'sub_kriteria_detail', name: 'sub_kriteria_detail', orderable: false },
                 { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
             ]
         });
@@ -93,25 +95,70 @@ Kriteria
         $(document).on("click", ".btn-sub-kriteria", function(e) {
             e.preventDefault();
             var href = $(this).data('href');
-            $("#modal-sub-kriteria").attr("data-href", href).modal("show").find(".modal-body").empty().load(href);
+            $("#modal-sub-kriteria")
+                .attr("data-href", href)
+                .modal("show")
+                .find(".modal-body")
+                .empty()
+                .load(href, function() { 
+                    checkSubKriteria(); 
+                });
         })
 
-        var i = 0;
+        var count_sub = 0;
+
         $(document).on("click", "#btn-tambah-sub", function() {
+            var cek = checkSubKriteria();
+
+            if (false === cek) {
+                alert('Max 10 Sub Kriteria');
+                return;
+            }
+
             $("#sub-kriteria-detail").append(`
                 <tr>
-                    <td></td>
+                    <td>` + (cek + 1)  + `</td>
                     <td>{!! Form::text('sub_kriteria_new[{i}][nama]') !!}</td>
                     <td>{!! Form::text('sub_kriteria_new[{i}][nilai]') !!}</td>
                     <td>{!! Form::button('<i class="fa fa-minus"></i>', ['class' => 'btn btn-sm btn-danger btn-minus-sub']) !!}</td>
                 </tr>
-            `.replace(/{i}/g, i));
-            i++;
-        })
+            `.replace(/{i}/g, count_sub));
+            $("#sub-kriteria-detail tr:last-child").hide().fadeIn(300, function() {
+                count_sub++;
+                checkSubKriteria();
+            });
+        });
+
+        $('#modal-sub-kriteria').on('hidden.bs.modal', function () {
+            count_sub = 0;
+        });
 
         $(document).on("click", ".btn-minus-sub", function() {
-            $(this).closest("tr").remove();
-        })
+            $(this).closest("tr").fadeOut(300, function() {
+                $(this).remove()
+                $("#sub-kriteria-detail tr").each(function(i) {
+                    $(this).find('td:eq(0)').html("<td>" + (i + 1) + "</td>")
+                });
+                checkSubKriteria();
+            });
+        });
+
+        function checkSubKriteria() {
+            var submit_kriteria = $("#form-sub-kriteria input[type=submit]");
+            var length = $("#sub-kriteria-detail tr").length;
+
+            if (length >= 1) {
+                submit_kriteria.show();
+            } else {
+                submit_kriteria.hide();
+            }
+
+            if (length >= 10) {
+                return false;
+            }
+
+            return length;
+        }
 
         $("#form-sub-kriteria").on('submit', function(e) {
             e.preventDefault();
@@ -127,6 +174,7 @@ Kriteria
 
                     var url = 'subKriteria/' + data.id + '/form';
                     $("#modal-sub-kriteria").find(".modal-body").empty().load(url);
+                    $('#kriteria-table').DataTable().ajax.reload();
                 },
                 error: function(xhr) {
                     if (xhr.status == 422) {

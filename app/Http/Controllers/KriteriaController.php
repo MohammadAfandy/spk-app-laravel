@@ -63,7 +63,10 @@ class KriteriaController extends Controller
 
     public function destroy(Kriteria $kriteria)
     {
-        $kriteria->delete();
+        DB::transaction(function() use($kriteria) {
+            $reset_bobot = Kriteria::where('spk_id', $kriteria->spk_id)->update(['bobot' => 0]);
+            $kriteria->delete();
+        });
         Session::flash('flash_message', 'Berhasil Hapus Data');
         return redirect()->route('kriteria.index', ['id_spk' => $kriteria->spk_id]);
     }

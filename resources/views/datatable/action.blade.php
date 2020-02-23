@@ -13,5 +13,5 @@
 </a>
 <hr style="margin: 3px">
 {!! Form::open(['route' => [$name . '.destroy', $data->id], 'method' => 'DELETE']) !!}
-    {!! Form::button('<i class="fa fa-trash"></i> Delete', ['class' => 'btn btn-action btn-xs btn-danger', 'type' => 'submit']) !!}
+    {!! Form::button('<i class="fa fa-trash"></i> Delete', ['class' => 'btn btn-delete btn-action btn-xs btn-danger', 'type' => 'submit']) !!}
 {!! Form::close() !!}

@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div id="modal-sub-kriteria" class="modal fade" role="dialog">
+<div id="modal-sub-kriteria" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog">
         {!! Form::open(['route' => 'subKriteria.store', 'id' => 'form-sub-kriteria']) !!}
         <!-- Modal content-->

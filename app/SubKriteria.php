@@ -20,6 +20,6 @@ class SubKriteria extends Model
 
 	public function kriteria()
 	{
-		return $this->hasOne('SpkApp\Kriteria', 'id', 'kriteria_id');
+		return $this->belongsTo('SpkApp\Kriteria', 'id', 'kriteria_id');
 	}
 }

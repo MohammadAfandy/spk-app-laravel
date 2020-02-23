@@ -13,7 +13,6 @@ class AlternatifController extends Controller
 {
     public function index(Request $request)
     {
-        // dd(Spk::find($request->input('id_spk'))->alternatif);
         $list_spk = Spk::pluck('nama', 'id');
         $spk_id = $request->input('id_spk');
         $alternatifs = [];

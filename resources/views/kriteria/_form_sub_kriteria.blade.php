@@ -1,7 +1,7 @@
 {!! Form::hidden('kriteria_id', $kriteria->id, ['class' => 'form-control']) !!}
 
 <div class="form-group row">
-    {!! Form::label('spk', 'Nama SPK : ' . $kriteria->nama, ['class' => 'col-md-4 col-form-label']) !!}
+    {!! Form::label('spk', 'Nama Kriteria : ' . $kriteria->nama, ['class' => 'col-md-4 col-form-label']) !!}
 </div> 
 <div class="row">
     <div class="col-md-12">
@@ -23,9 +23,9 @@
             </thead>
             <tbody id="sub-kriteria-detail">
                 @if (!empty($sub_kriterias))
-                    @foreach($sub_kriterias as $sub_kriteria)
+                    @foreach($sub_kriterias as $key => $sub_kriteria)
                         <tr>
-                            <td></td>
+                            <td>{{ $key + 1 }}</td>
                             <td>{!! Form::text('sub_kriteria[' . $sub_kriteria->id . '][nama]', $sub_kriteria->nama) !!}</td>
                             <td>{!! Form::text('sub_kriteria[' . $sub_kriteria->id . '][nilai]', $sub_kriteria->nilai) !!}</td>
                             <td>{!! Form::button('<i class="fa fa-minus"></i>', ['class' => 'btn btn-sm btn-danger btn-minus-sub']) !!}</td>

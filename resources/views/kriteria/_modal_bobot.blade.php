@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div id="modal-bobot" class="modal fade" role="dialog">
+<div id="modal-bobot" class="modal fade" role="dialog" data-backdrop="static">
     <div class="modal-dialog">
         {!! Form::open(['route' => 'kriteria.setBobot', 'id' => 'form-set-bobot']) !!}
         <!-- Modal content-->

@@ -129,6 +129,11 @@ return [
             'route' => 'kriteria.index',
             'icon' => 'lock'
         ],
+        [
+            'text' => 'Penilaian',
+            'route' => 'penilaian.index',
+            'icon' => 'lock'
+        ],
     ],
 
     /*
