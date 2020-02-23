@@ -1,11 +1,11 @@
-@if (isset($alternatif))
-    {!! Form::hidden('id', $alternatif->id) !!}
-    {!! Form::hidden('spk_id', $alternatif->spk->id) !!}
+@if (isset($kriteria))
+    {!! Form::hidden('id', $kriteria->id) !!}
+    {!! Form::hidden('spk_id', $kriteria->spk->id) !!}
 
     <div class="form-group row">
         {!! Form::label('spk', 'Nama SPK :', ['class' => 'col-sm-2 col-form-label']) !!}
         <div class="col-sm-10">
-            {!! Form::text('spk', $alternatif->spk->nama, ['class' => 'form-control', 'readonly' => true]) !!}
+            {!! Form::text('spk', $kriteria->spk->nama, ['class' => 'form-control', 'readonly' => true]) !!}
         </div>
     </div>
 @else
@@ -20,9 +20,16 @@
 @endif
 
 <div class="form-group row">
-    {!! Form::label('nama', 'Nama Alternatif :', ['class' => 'col-sm-2 col-form-label']) !!}
+    {!! Form::label('nama', 'Nama Kriteria :', ['class' => 'col-sm-2 col-form-label']) !!}
     <div class="col-sm-10">
         {!! Form::text('nama', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
+<div class="form-group row">
+    {!! Form::label('tipe', 'Tipe :', ['class' => 'col-sm-2 col-form-label']) !!}
+    <div class="col-sm-10">
+        {!! Form::select('tipe', $tipe, null, ['class' => 'form-control']) !!}
     </div>
 </div>
 

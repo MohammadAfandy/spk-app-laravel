@@ -10,10 +10,10 @@ use Session;
 
 class AlternatifController extends Controller
 {
-	public function me(Request $request)
-	{
+    public function me(Request $request)
+    {
         $spk_id = $request->input('id_spk');
-        $alternatif = Alternatif::with('spk')->where('spk_id', $spk_id)->orderBy('created_at', 'desc')->get();
+        $alternatif = Alternatif::with('spk')->where('spk_id', $spk_id)->get();
         return Datatables::of($alternatif)
             ->addIndexColumn()
             ->editColumn('nama_spk', function($alternatif) {
@@ -24,5 +24,5 @@ class AlternatifController extends Controller
             })
             ->rawColumns(['aksi'])
             ->make(true);
-	}
+    }
 }

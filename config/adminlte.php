@@ -124,6 +124,11 @@ return [
             'route' => 'alternatif.index',
             'icon' => 'lock'
         ],
+        [
+            'text' => 'Kriteria',
+            'route' => 'kriteria.index',
+            'icon' => 'lock'
+        ],
     ],
 
     /*

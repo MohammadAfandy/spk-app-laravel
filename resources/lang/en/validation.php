@@ -146,4 +146,5 @@ return [
 
     'attributes' => [],
 
+    'sum_equals' => 'The :attribute sum must equals to :sum_equals'
 ];

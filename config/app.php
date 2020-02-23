@@ -178,6 +178,8 @@ return [
         SpkApp\Providers\EventServiceProvider::class,
         SpkApp\Providers\RouteServiceProvider::class,
 
+        // Additional
+        SpkApp\Providers\HelperServiceProvider::class,
     ],
 
     /*
